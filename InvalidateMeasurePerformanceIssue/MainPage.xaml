@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:invalidateMeasurePerformanceIssue="clr-namespace:InvalidateMeasurePerformanceIssue"
+             x:Class="InvalidateMeasurePerformanceIssue.MainPage"
+             x:DataType="invalidateMeasurePerformanceIssue:MainPageViewModel">
+
+  <ScrollView>
+    <Grid RowDefinitions="Auto,*">
+      <Button Grid.Row="0"
+              Clicked="Button_OnClicked"
+              HorizontalOptions="Fill" />
+      <VerticalStackLayout Grid.Row="1" BindableLayout.ItemsSource="{Binding Things}">
+        <BindableLayout.ItemTemplate>
+          <DataTemplate x:DataType="{x:Type invalidateMeasurePerformanceIssue:Thingwithvisibility}">
+            <invalidateMeasurePerformanceIssue:MyGrid ColumnDefinitions="20,*,Auto" RowDefinitions="1,20,20">
+              <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ToggleVisibilityCommand}" />
+              </Grid.GestureRecognizers>
+              <BoxView Grid.Row="0"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="3"
+                       BackgroundColor="Gray"
+                       HeightRequest="1"
+                       HorizontalOptions="Fill" />
+              <BoxView Grid.Row="1"
+                       Grid.RowSpan="2"
+                       Grid.Column="0"
+                       BackgroundColor="Gray"
+                       WidthRequest="8"
+                       HeightRequest="8"
+                       VerticalOptions="Center" />
+              <Label Grid.Row="1"
+                     Grid.Column="1"
+                     LineBreakMode="TailTruncation"
+                     Text="{Binding Name}" />
+              <Label Grid.Row="2"
+                     Grid.Column="1"
+                     LineBreakMode="TailTruncation"
+                     Text="{Binding Name}" />
+              <BoxView Grid.Row="1"
+                       Grid.RowSpan="2"
+                       Grid.Column="2"
+                       IsVisible="{Binding IsVisible}"
+                       Color="Red"
+                       WidthRequest="8"
+                       HeightRequest="8"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center" />
+            </invalidateMeasurePerformanceIssue:MyGrid>
+          </DataTemplate>
+        </BindableLayout.ItemTemplate>
+      </VerticalStackLayout>
+    </Grid>
+  </ScrollView>
+
+</ContentPage>
