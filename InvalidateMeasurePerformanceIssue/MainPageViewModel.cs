@@ -13,7 +13,7 @@ public class MainPageViewModel
         Things = new List<Thingwithvisibility>();
         for (var i = 0; i < 200; i++)
         {
-            Things.Add(new Thingwithvisibility { Name = $"{i}: Thing with a long name that should tailtruncate when there is not enough space" });
+            Things.Add(new Thingwithvisibility { Name = $"{i}: Thing" });
         }
     }
 }
